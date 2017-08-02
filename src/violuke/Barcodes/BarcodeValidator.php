@@ -68,7 +68,11 @@ class BarcodeValidator {
 				if (substr($this->gtin14, 6, 1) == 5) {
 					$this->type = self::TYPE_UPC_COUPON_CODE;
 				} else {
-					$this->type = self::TYPE_UPC;
+					if (substr($this->gtin14, 0, 1) == 0) {
+						$this->type = self::TYPE_EAN;
+					} else {
+						$this->type = self::TYPE_UPC;
+					}
 				}
 			} elseif (substr($this->gtin14, 0, 6) == 0) {
 				// GTIN-14 code
@@ -112,3 +116,4 @@ class BarcodeValidator {
 		}
 	}
 }
+
